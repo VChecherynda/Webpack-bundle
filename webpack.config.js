@@ -15,14 +15,18 @@ module.exports = {
 					fallback: 'style-loader',
 					use: ['css-loader', 'sass-loader']
 				})
+			},
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: 'babel-loader'
 			}
 		]
 	},
 	devServer: {
-		contentBase: __dirname + './dist',
+		contentBase: __dirname + "/dist",
   		compress: true,
-  		stats: 'errors-only',
-  		open: true
+  		stats: 'errors-only'
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
