@@ -2,10 +2,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-	entry: './src/app.js',
+	entry: {
+		app: './src/app.js',
+		contact: './src/contact.js',
+
+	},
 	output: {
 		path: __dirname + '/dist',
-		filename: 'app.bundle.js'
+		filename: '[name].bundle.js'
 	},
 	module: {
 		rules: [
@@ -26,13 +30,19 @@ module.exports = {
 	devServer: {
 		contentBase: __dirname + "/dist",
   		compress: true,
-  		stats: 'errors-only'
+  		stats: 'errors-only' // Show only errors
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: 'Project Demo',
 			hash: true,
-			template: './src/index.ejs'
+			template: './src/index.html' // Load a custom template 
+		}),
+		new HtmlWebpackPlugin({
+			title: 'Contact Page',
+			hash: true,
+			filename: 'contact.html',
+			template: './src/contact.html' 
 		}),
 		new ExtractTextPlugin('style.css')
 	]
